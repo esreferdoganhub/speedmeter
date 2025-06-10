@@ -1,0 +1,62 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build SpeedMeter",
+            "type": "shell",
+            "command": "swift",
+            "args": ["build"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build Release",
+            "type": "shell",
+            "command": "swift",
+            "args": ["build", "-c", "release"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run SpeedMeter",
+            "type": "shell",
+            "command": "./.build/debug/SpeedMeter",
+            "group": "test",
+            "dependsOn": "Build SpeedMeter",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Create App Bundle",
+            "type": "shell",
+            "command": "bash",
+            "args": ["-c", "swift build -c release && mkdir -p SpeedMeter.app/Contents/MacOS && mkdir -p SpeedMeter.app/Contents/Resources && cp .build/release/SpeedMeter SpeedMeter.app/Contents/MacOS/ && echo 'App bundle created successfully!'"],
+            "group": "build",
+            "dependsOn": "Build Release",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        }
+    ]
+}

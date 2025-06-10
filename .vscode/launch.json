@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:speedmeter}",
+            "name": "Debug SpeedMeter",
+            "program": "${workspaceFolder:speedmeter}/.build/debug/SpeedMeter",
+            "preLaunchTask": "swift: Build Debug SpeedMeter"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:speedmeter}",
+            "name": "Release SpeedMeter",
+            "program": "${workspaceFolder:speedmeter}/.build/release/SpeedMeter",
+            "preLaunchTask": "swift: Build Release SpeedMeter"
+        }
+    ]
+}
