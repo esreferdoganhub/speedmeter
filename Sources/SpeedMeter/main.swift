@@ -16,8 +16,19 @@ class SpeedMeterApp: NSObject, NSApplicationDelegate {
         
         // Menü çubuğu öğesi oluştur
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        statusItem.button?.title = "↓ -- ↑ --"
-        statusItem.button?.font = NSFont.monospacedDigitSystemFont(ofSize: 12, weight: .regular)
+        
+        // İkon yükle veya text fallback kullan
+        if let iconPath = Bundle.main.path(forResource: "MenuBarIcon", ofType: "png"),
+           let icon = NSImage(contentsOfFile: iconPath) {
+            icon.size = NSSize(width: 16, height: 16)
+            icon.isTemplate = true // Dark mode uyumluluğu için
+            statusItem.button?.image = icon
+            statusItem.button?.imagePosition = .imageLeft
+        } else {
+            // Fallback text
+            statusItem.button?.title = "⚡"
+            statusItem.button?.font = NSFont.systemFont(ofSize: 14)
+        }
         
         // Sol tık için action ekle
         statusItem.button?.action = #selector(statusItemClicked)
@@ -102,7 +113,13 @@ class SpeedMeterApp: NSObject, NSApplicationDelegate {
     private func updateSpeedDisplay(download: Double, upload: Double) {
         let downloadStr = formatSpeed(download)
         let uploadStr = formatSpeed(upload)
-        statusItem.button?.title = "↓ \(downloadStr) ↑ \(uploadStr)"
+        
+        // İkon varsa sadece hızları göster, yoksa ok sembolleri ile
+        if statusItem.button?.image != nil {
+            statusItem.button?.title = " ↓\(downloadStr) ↑\(uploadStr)"
+        } else {
+            statusItem.button?.title = "↓ \(downloadStr) ↑ \(uploadStr)"
+        }
     }
     
     private func formatSpeed(_ bytesPerSecond: Double) -> String {

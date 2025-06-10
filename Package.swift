@@ -15,7 +15,10 @@ let package = Package(
         .executableTarget(
             name: "SpeedMeter",
             dependencies: [],
-            path: "Sources/SpeedMeter"
+            path: "Sources/SpeedMeter",
+            resources: [
+                .copy("Resources")
+            ]
         )
     ]
 )
