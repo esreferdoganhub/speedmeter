@@ -18,6 +18,10 @@ let package = Package(
             path: "Sources/SpeedMeter",
             resources: [
                 .copy("Resources")
+            ],
+            linkerSettings: [
+                .linkedFramework("AppKit"),
+                .linkedFramework("IOKit")
             ]
         )
     ]

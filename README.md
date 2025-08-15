@@ -14,6 +14,7 @@ macOS menü çubuğunda anlık internet indirme ve yükleme hızlarını göster
 - 💻 Düşük sistem kaynağı kullanımı
 - 🎯 Menü çubuğu entegrasyonu
 - 🚫 Dock'ta görünmez (sadece menü çubuğunda)
+- 🖱 Magic Mouse orta tıklama desteği
 
 ## Kurulum
 
