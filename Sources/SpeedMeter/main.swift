@@ -9,6 +9,7 @@ class SpeedMeterApp: NSObject, NSApplicationDelegate {
     private var graphWindowController: GraphWindowController?
     private var settings: AppSettings = .default
     private let speedDataStore = SpeedDataStore()
+    private var mouseTouchManager: MagicMouseTouchManager?
     
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Ayarları yükle
@@ -48,6 +49,8 @@ class SpeedMeterApp: NSObject, NSApplicationDelegate {
             }
         })
         speedMonitor.startMonitoring()
+        mouseTouchManager = MagicMouseTouchManager()
+        mouseTouchManager?.start()
         
         // Uygulamayı dock'tan gizle
         NSApp.setActivationPolicy(.accessory)
@@ -207,6 +210,10 @@ class SpeedMeterApp: NSObject, NSApplicationDelegate {
         settings.showUnits = show
         let defaults = UserDefaults.standard
         defaults.set(show, forKey: "showUnits")
+    }
+
+    func applicationWillTerminate(_ notification: Notification) {
+        mouseTouchManager?.stop()
     }
 }
 
